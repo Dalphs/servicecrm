@@ -1,0 +1,48 @@
+[
+    {
+        "id":1,
+        "firstname":"Simon",
+        "lastname":"Dalby",
+        "street":"Throsensvej",
+        "streetnumber":"10",
+        "zip":"4800",
+        "city": "Nykøbing F",
+        "phone":"29219953",
+        "email":"hej.simon@hotmail.com",
+        "intervalInside":"8",
+        "intervalOutside":"4",
+        "priceInside":300,
+        "priceOutside":450,
+        "nextvisit":25,
+        "visits":[
+            {"timestamp":1619846639},
+            {"timestamp":1617427439},
+            {"timestamp":1615011839}
+        ],
+        "note":"Der skal vaskes Velux ruder",
+        "created":1610273043
+    },
+    {
+        "id":2,
+        "firstname":"Marc",
+        "lastname":"Christnsen",
+        "street":"Ringtoften",
+        "streetnumber":"33 1 th",
+        "zip":"2740",
+        "city": "Skovlunde",
+        "phone":"50524846",
+        "email":"info@vinduespudsermmc.dk",
+        "intervalInside":"8",
+        "intervalOutside":"4",
+        "priceInside":300,
+        "priceOutside":450,
+        "nextvisit":23,
+        "visits":[
+            {"timestamp":1619646639},
+            {"timestamp":1617627439},
+            {"timestamp":1614811839}
+        ],
+        "note":"Der skal poleres i ca. 4 meters højde",
+        "created":1612273043
+    }
+]
