@@ -4,9 +4,14 @@
     margin: 1em 1em;
 }
 
+.accordion {
+    cursor:pointer;
+}
+
 .dashboardHeader p{
     text-align: center;
     font-weight: bold;
+    flex:1;
 }
 
 .dashboardHeader{
@@ -15,10 +20,58 @@
 
 .customerCardText{
     width:100%;
-    flex:1;
     display:flex;
     justify-content: center;
 }
 .customerCardText p{
 word-break:break-word;
+text-align: center;
+display:inline-block;
+}
+
+.hide{
+    display:none;
+}
+
+.navbar{
+    border-bottom: 1px solid #DDD;
+}
+
+.navbar div{
+    flex:1;
+}
+
+#lastNavbarItem{
+    display: flex;
+    justify-content: flex-end;
+}
+
+#lastNavbarItem button{
+    margin: 1em;
+    background-color: #1e8105;
+    color:white;
+    border: none;
+    border-radius: 20px;
+    padding: 0.5em 1.5em;
+    cursor: pointer;
+}
+
+.overlay{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100vw;
+    height: 100vh;
+    background: rgba(221, 221, 221, 0.548);
+    z-index: 4;
+}
+
+#editUserContainer{
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    z-index: 5;
+    transform: translate(-50%, -50%);
+    padding:3em;
+    background: #FFF;
 }
