@@ -3,8 +3,6 @@ import './styles.css'
 
 function CustomerCard(props) {
     const [show, setShow] = useState(false);
-    console.log(props.customer.visits.length)
-
     let convertToDate = (unixTime) => {
         let options = {year: 'numeric', month: 'long', day: 'numeric' };
         return new Date(unixTime*1000).toLocaleDateString("da-DK", options);
@@ -21,10 +19,13 @@ function CustomerCard(props) {
                 <div className="customerCardText flex1"><p>{props.customer.phone}</p></div>
                 <div className="customerCardText flex1"><p>{`${props.customer.intervalOutside} / ${props.customer.intervalOutside}`}</p></div>
                 <div className="customerCardText flex1"><p>{`${props.customer.priceOutside} / ${props.customer.priceInside}`}</p></div>
-                <div className="customerCardText flex1"><p>{convertToDate(props.customer.visits[props.customer.visits.length - 1].timestamp)}</p></div>
+                <div className="customerCardText flex1"><p>{ 
+                props.customer.visits.length > 0 ? convertToDate(props.customer.visits[props.customer.visits.length - 1].timestamp) : "Ingen besøg"}
+                </p></div>
+            
                 <div className="customerCardText flex2"><p>{props.customer.note}</p></div>
             </div>
-            <div class={`df-fdr accordionContent ${show ? "" : "hide"}`}>
+            <div className={`df-fdr accordionContent ${show ? "" : "hide"}`}>
                 <div className="customerCardText"><p>{props.customer.email}</p></div>
             </div>
         </div>
