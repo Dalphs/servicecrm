@@ -68,10 +68,24 @@ display:inline-block;
 
 #editUserContainer{
     position: absolute;
-    top: 25%;
+    top: 50%;
     left: 50%;
     z-index: 5;
     transform: translate(-50%, -50%);
     padding:3em;
     background: #FFF;
+}
+
+.changeUser > div{
+    margin: 0.5em;
+    display:flex;
+    flex-direction: row; 
+}
+
+.changeUser .addressContainer {
+    display: flex;  
+    flex-direction: column;
+}
+.addressContainer div{
+    margin: 0.1em
 }

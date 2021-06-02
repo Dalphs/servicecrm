@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { TextField, Button } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,25 +11,11 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 function UserForm(props) {
-    const [user, setUser] = useState({
-        "id":"",
-        "firstname":"",
-        "lastname":"",
-        "street":"",
-        "streetnumber":"",
-        "zip":"",
-        "city": "",
-        "phone":"",
-        "email":"",
-        "intervalInside":"",
-        "intervalOutside":"",
-        "priceInside":"",
-        "priceOutside":"",
-        "nextvisit":"",
-        "visits":[],
-        "note":"",
-        "created":""
-    })
+    const [user, setUser] = useState({...props.user})
+
+    useEffect(() => {
+        setUser(props.user);
+    }, [props.user])
 
     const handleSubmit = (e) => {
         setUser({
@@ -50,22 +36,24 @@ function UserForm(props) {
         })
     }
 
+    console.log(user)
+
     const classes = useStyles();
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form className="changeUser df-fdc" onSubmit={handleSubmit}>
                 <div>
                     <TextField variant="outlined" label="Fornavn" name="firstname" onChange={onChange} value={user.firstname}/>
                     <TextField variant="outlined" label="Efternavn" name="lastname" onChange={onChange} value={user.lastname}/>
                 </div>
-                <div>
-                    <div>
-                        <TextField variant="outlined" label="Vej" name="street" onChange={onChange} value={user.street}/>
-                        <TextField variant="outlined" label="nummer" name="streetnumber" onChange={onChange} value={user.streetnumber}/>
+                <div className="addressContainer">
+                    <div className="df-fdr">
+                        <TextField className="flex2" variant="outlined" label="Vej" name="street" onChange={onChange} value={user.street}/>
+                        <TextField className="flex1" variant="outlined" label="nummer" name="streetnumber" onChange={onChange} value={user.streetnumber}/>
                     </div>
-                    <div>
-                        <TextField variant="outlined" label="postnummer" name="zip" onChange={onChange} value={user.zip}/>
-                        <TextField variant="outlined" label="By" name="city" onChange={onChange} value={user.city} />
+                    <div className="df-fdr">
+                        <TextField className="flex1" variant="outlined" label="postnummer" name="zip" onChange={onChange} value={user.zip}/>
+                        <TextField className="flex2" variant="outlined" label="By" name="city" onChange={onChange} value={user.city} />
                     </div>
                 </div>
 
