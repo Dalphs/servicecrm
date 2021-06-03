@@ -27,10 +27,10 @@ function CustomerCard(props) {
                 <div className="customerCardText flex2"><p>{props.customer.note}</p></div>
             </div>
             <div className={`df-fdr accordionContent ${show ? "" : "hide"}`}>
-                <div className="customerCardText"><p>{props.customer.email}</p></div>
-                <Button variant="contained" color="primary" onClick={() => {props.editCustomer(props.customer.id)}}>
+                <div className="customerCardText flex1"><p>{props.customer.email}</p></div>
+                <div className="customerCardText flex1"><Button variant="contained" color="primary" onClick={() => {props.editCustomer(props.customer.id)}}>
                     Rediger kunde
-                 </Button>
+                 </Button></div>
 
             </div>
         </div>

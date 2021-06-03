@@ -32,12 +32,9 @@ const CustomerDashboard = () => {
     let tableHeaders = ["Næste besøg", "Navn", "Adresse", "phone", "Interval ude/inde", "Pris ude/inde", "Sidste besøg", "Bemærkninger"]
 
     const getCustomer = (id) => {
-        console.log(`looking for user with id ${id}`)
-        console.log(`looking in ${JSON.stringify(customers)}`)
         let result = false;
         customers.forEach(customer => {
             if(customer.id === id){
-                console.log(`Found customer : ${JSON.stringify(customer)}`)
                 result = {...customer}
             }
         })
@@ -55,20 +52,24 @@ const CustomerDashboard = () => {
     }
 
     const saveUser = (user) => {
-        console.log("savingUser")
         let oldCustomers = [...customers]
         let customerFound = false
+        console.log(`looking for customer`)
+        let newCustomers = []
         customers.forEach(customer => {
             if(customer.id === user.id){
+                console.log(`found customer with id ${customer.id}`)
                 customer = {...user};
+                console.log(`new customer looks like this ${JSON.stringify(customers)}`)
                 customerFound = true
             }
+            newCustomers.push(customer)
         })
         if(!customerFound) {
-            oldCustomers = [...oldCustomers, {...user}]
+            newCustomers = [...oldCustomers, {...user}]
         }
         setCustomers([
-            ...oldCustomers
+            ...newCustomers
         ])
     }
     

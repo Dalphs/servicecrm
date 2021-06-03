@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import { TextField, Button } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
 import { makeStyles } from '@material-ui/core/styles';
-import { SettingsInputAntennaTwoTone } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -18,11 +17,17 @@ function UserForm(props) {
     }, [props.user])
 
     const handleSubmit = (e) => {
-        setUser({
-            ...user,
-            created:Date.now(),
-            id:10
-        })
+        let newUser = props.user.id === ""
+        console.log(newUser)
+        if (newUser){
+            setUser({
+                ...user,
+                created:Date.now(),
+                id:10
+            })
+        } else{
+            setUser({...user})
+        }
         props.saveUser(user)
         e.preventDefault()
     }
@@ -64,8 +69,8 @@ function UserForm(props) {
                     <TextField variant="outlined" label="Interval inde" name="intervalInside" onChange={onChange} value={user.intervalInside}/>
                 </div>
                 <div>
-                    <TextField variant="outlined" label="Pris inde" name="priceOutside" onChange={onChange} value={user.priceOutside}/>
-                    <TextField variant="outlined" label="Pris ude" name="priceInside" onChange={onChange} value={user.priceInside}/>
+                    <TextField variant="outlined" label="Pris ude" name="priceOutside" onChange={onChange} value={user.priceOutside}/>
+                    <TextField variant="outlined" label="Pris inde" name="priceInside" onChange={onChange} value={user.priceInside}/>
                 </div>
                 <TextField
                     id="outlined-multiline-flexible"
