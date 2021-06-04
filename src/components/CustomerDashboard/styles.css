@@ -89,3 +89,7 @@ display:inline-block;
 .addressContainer div{
     margin: 0.1em
 }
+
+.navbar h3{
+    text-align: center;
+}

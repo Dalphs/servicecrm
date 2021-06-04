@@ -31,6 +31,14 @@ const CustomerDashboard = () => {
 
     let tableHeaders = ["Næste besøg", "Navn", "Adresse", "phone", "Interval ude/inde", "Pris ude/inde", "Sidste besøg", "Bemærkninger"]
 
+    const getWeekNumber = (unix) => {
+        var date = new Date(unix);
+        date.setHours(0, 0, 0, 0);
+        date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
+        var week1 = new Date(date.getFullYear(), 0, 4);
+        return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+      }
+
     const getCustomer = (id) => {
         let result = false;
         customers.forEach(customer => {
@@ -72,18 +80,32 @@ const CustomerDashboard = () => {
             ...newCustomers
         ])
     }
+
+    const sortCustomers = (sortBy) => {
+        let customerArray = [...customers]
+        customerArray.sort(function(a, b){
+            if (typeof(a[sortBy]) === "number"){
+                return a[sortBy] - b[sortBy]
+            } else {
+                console.log(a[sortBy] > b[sortBy])
+                return a[sortBy] > b[sortBy] ? 1: -1
+            }
+        });
+        console.log(customerArray)
+        setCustomers(customerArray)
+    }
     
     
     return (
         <div>
-            <Navbar editUser={editUser}></Navbar>
+            <Navbar editUser={editUser} weeknumber={getWeekNumber(new Date())}></Navbar>
             <div className={`overlay ${showUserInfo ? "" : "hide"}`} onClick={() => editUser()}></div>
             <div id="editUserContainer" className={`${showUserInfo ? "" : "hide"}`}>
                 <UserForm saveUser={saveUser} user={customerOnDisplay}></UserForm>
             </div>
             <div className="df-fdr dashboardHeader">
-                <div className="customerCardText flex1"><p>{tableHeaders[0]}</p></div>
-                <div className="customerCardText flex2"><p>{tableHeaders[1]}</p></div>
+                <div className="customerCardText flex1" onClick={(() => sortCustomers("nextvisit"))}><p>{tableHeaders[0]}</p></div>
+                <div className="customerCardText flex2" onClick={(() => sortCustomers("firstname"))}><p>{tableHeaders[1]}</p></div>
                 <div className="customerCardText flex2"><p>{tableHeaders[2]}</p></div>
                 <div className="customerCardText flex1"><p>{tableHeaders[3]}</p></div>
                 <div className="customerCardText flex1"><p>{tableHeaders[4]}</p></div>

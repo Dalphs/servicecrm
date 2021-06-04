@@ -41,7 +41,7 @@ function UserForm(props) {
         })
     }
 
-    console.log(user)
+    
 
     const classes = useStyles();
     return (
@@ -72,6 +72,7 @@ function UserForm(props) {
                     <TextField variant="outlined" label="Pris ude" name="priceOutside" onChange={onChange} value={user.priceOutside}/>
                     <TextField variant="outlined" label="Pris inde" name="priceInside" onChange={onChange} value={user.priceInside}/>
                 </div>
+                <TextField variant="outlined" label="Næste besøg" name="nextvisit" onChange={onChange} value={user.nextvisit}/>
                 <TextField
                     id="outlined-multiline-flexible"
                     label="Bemærkninger"
