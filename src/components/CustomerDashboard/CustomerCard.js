@@ -31,6 +31,9 @@ function CustomerCard(props) {
                 <div className="customerCardText flex1"><Button variant="contained" color="primary" onClick={() => {props.editCustomer(props.customer.id)}}>
                     Rediger kunde
                  </Button></div>
+                 <div className="customerCardText flex1"><Button variant="contained" color="primary" onClick={() => {props.jobDone(props.customer.id)}}>
+                    Job udført
+                 </Button></div>
 
             </div>
         </div>

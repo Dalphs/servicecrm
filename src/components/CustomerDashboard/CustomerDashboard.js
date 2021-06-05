@@ -94,6 +94,22 @@ const CustomerDashboard = () => {
         console.log(customerArray)
         setCustomers(customerArray)
     }
+
+    const jobDone = (id) => {
+        let currentCustomers = [...customers];
+        currentCustomers.forEach( customer => {
+            if(customer.id === id){
+                let nextVisit = new Date()
+                let days = nextVisit.getDate() + customer.intervalOutside
+                nextVisit.setDate(nextVisit.getDate() + Number(customer.intervalOutside) * 7)
+                let nextVisitWeek = getWeekNumber(nextVisit.getTime())
+                customer.nextvisit = nextVisitWeek
+                customer.visits.push({timestamp: new Date().getTime()/1000})
+            }
+        })
+        console.log(currentCustomers)
+        setCustomers(currentCustomers)
+    }
     
     
     return (
@@ -114,7 +130,7 @@ const CustomerDashboard = () => {
                 <div className="customerCardText flex2"><p>{tableHeaders[7]}</p></div>
             </div>
             {customers.map((customer) => {
-                return <CustomerCard customer={customer} editCustomer={editUser}></CustomerCard>
+                return <CustomerCard customer={customer} editCustomer={editUser} jobDone={jobDone}></CustomerCard>
             })}
         </div>
     );
