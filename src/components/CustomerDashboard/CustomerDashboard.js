@@ -3,9 +3,11 @@ import './styles.css'
 import CustomerCard from './CustomerCard'
 import Navbar from './Navbar'
 import UserForm from './UserForm'
+import {Button, TextField} from '@material-ui/core';
 let json = require('../customers.json')
 
 const CustomerDashboard = () => {
+    const [login, setLogin] = useState({username: "", password:""})
     const[showUserInfo, setShowUserInfo] = useState(false)
     const[customerOnDisplay, setCustomerOnDisplay] = useState({})
     const [customers, setCustomers] = useState(json)
@@ -110,8 +112,22 @@ const CustomerDashboard = () => {
         console.log(currentCustomers)
         setCustomers(currentCustomers)
     }
-    
-    
+    let loggedIn = false;
+
+    let handleSubmit = (e) => {
+        e.preventDefault()
+    }
+
+    const onChange= (e) => {
+        const value = e.target.value;
+        console.log(`${e.target.name}: ${value}`)
+        setLogin({
+            ...login,
+            [e.target.name]:value
+        })
+    }
+
+    if (loggedIn){
     return (
         <div>
             <Navbar editUser={editUser} weeknumber={getWeekNumber(new Date())}></Navbar>
@@ -134,6 +150,24 @@ const CustomerDashboard = () => {
             })}
         </div>
     );
+        } else {
+            return(
+            <div id="loginWrapper">
+                <form onSubmit={handleSubmit}>
+                    <TextField variant="outlined" label="Fornavn" name="username" onChange={onChange} value={login.firstname}/>
+                    <TextField variant="outlined" label="Efternavn" name="password" type="password" onChange={onChange} value={login.lastname}/>
+                    <Button
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                    type="submit"
+                    >
+                        Log in
+                </Button>
+                </form>
+            </div>
+            )
+        }
 };
 
 export default CustomerDashboard;

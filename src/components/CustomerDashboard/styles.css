@@ -93,3 +93,20 @@ display:inline-block;
 .navbar h3{
     text-align: center;
 }
+
+#loginWrapper{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#loginWrapper form{
+    display: flex;
+    flex-direction: column;
+}
+
+#loginWrapper form>*{
+    margin:10px
+}
