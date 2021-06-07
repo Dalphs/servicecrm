@@ -112,7 +112,7 @@ const CustomerDashboard = () => {
         console.log(currentCustomers)
         setCustomers(currentCustomers)
     }
-    let loggedIn = false;
+    let loggedIn = true;
 
     let handleSubmit = (e) => {
         e.preventDefault()

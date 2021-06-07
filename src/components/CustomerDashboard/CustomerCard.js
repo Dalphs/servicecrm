@@ -1,8 +1,18 @@
 import React, { useState } from 'react';
 import './styles.css'
 import { Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      '& > *': {
+        margin: theme.spacing(1),
+      },
+    },
+  }));
 
 function CustomerCard(props) {
+    const classes = useStyles();
     const [show, setShow] = useState(false);
     let convertToDate = (unixTime) => {
         let options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -28,12 +38,14 @@ function CustomerCard(props) {
             </div>
             <div className={`df-fdr accordionContent ${show ? "" : "hide"}`}>
                 <div className="customerCardText flex1"><p>{props.customer.email}</p></div>
-                <div className="customerCardText flex1"><Button variant="contained" color="primary" onClick={() => {props.editCustomer(props.customer.id)}}>
-                    Rediger kunde
-                 </Button></div>
-                 <div className="customerCardText flex1"><Button variant="contained" color="primary" onClick={() => {props.jobDone(props.customer.id)}}>
-                    Job udført
-                 </Button></div>
+                <div className={`${classes.root} df-fdr flex2`}>
+                    <div className="customerCardText flex1"><Button variant="outlined" color="primary" size="small" onClick={() => {props.editCustomer(props.customer.id)}}>
+                        Rediger kunde
+                    </Button></div>
+                    <div className="customerCardText flex1"><Button variant="outlined" color="primary" size="small" onClick={() => {props.jobDone(props.customer.id)}}>
+                        Job udført
+                    </Button></div>
+                 </div>
 
             </div>
         </div>
