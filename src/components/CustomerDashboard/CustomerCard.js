@@ -30,9 +30,9 @@ function CustomerCard(props) {
                 <div className="customerCardText flex1"><p>{props.customer.phone}</p></div>
                 <div className="customerCardText flex1"><p>{`${props.customer.intervalOutside} / ${props.customer.intervalOutside}`}</p></div>
                 <div className="customerCardText flex1"><p>{`${props.customer.priceOutside} / ${props.customer.priceInside}`}</p></div>
-                <div className="customerCardText flex1"><p>{
+                {/*<div className="customerCardText flex1"><p>{
                     props.customer.visits.length > 0 ? convertToDate(props.customer.visits[props.customer.visits.length - 1].timestamp) : "Ingen besøg"}
-                </p></div>
+                </p></div>}*/}
 
                 <div className="customerCardText flex2"><p>{props.customer.note}</p></div>
             </div>

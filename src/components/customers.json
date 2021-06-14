@@ -1,6 +1,5 @@
 [
     {
-        "id":1,
         "firstname":"Simon",
         "lastname":"Dalby",
         "street":"Throsensvej",
@@ -14,16 +13,9 @@
         "priceInside":300,
         "priceOutside":450,
         "nextvisit":25,
-        "visits":[
-            {"timestamp":1619846639},
-            {"timestamp":1617427439},
-            {"timestamp":1615011839}
-        ],
-        "note":"Der skal vaskes Velux ruder",
-        "created":1610273043
+        "note":"Der skal vaskes Velux ruder"
     },
     {
-        "id":2,
         "firstname":"Marc",
         "lastname":"Christnsen",
         "street":"Ringtoften",
@@ -37,16 +29,9 @@
         "priceInside":300,
         "priceOutside":450,
         "nextvisit":26,
-        "visits":[
-            {"timestamp":1619646639},
-            {"timestamp":1617627439},
-            {"timestamp":1614811839}
-        ],
-        "note":"Der skal poleres i ca. 4 meters højde",
-        "created":1612273043
+        "note":"Der skal poleres i ca. 4 meters højde"
     },
     {
-        "id":3,
         "firstname":"John",
         "lastname":"Christnsen",
         "street":"Ringtoften",
@@ -60,16 +45,9 @@
         "priceInside":300,
         "priceOutside":450,
         "nextvisit":27,
-        "visits":[
-            {"timestamp":1619646639},
-            {"timestamp":1617627439},
-            {"timestamp":1614811839}
-        ],
-        "note":"Der skal poleres i ca. 4 meters højde",
-        "created":1612273043
+        "note":"Der skal poleres i ca. 4 meters højde"
     },
     {
-        "id":4,
         "firstname":"Preben",
         "lastname":"Christnsen",
         "street":"Ringtoften",
@@ -83,13 +61,7 @@
         "priceInside":300,
         "priceOutside":450,
         "nextvisit":26,
-        "visits":[
-            {"timestamp":1619646639},
-            {"timestamp":1617627439},
-            {"timestamp":1614811839}
-        ],
-        "note":"Der skal poleres i ca. 4 meters højde",
-        "created":1612273043
+        "note":"Der skal poleres i ca. 4 meters højde"
     }
 ]
 

@@ -1,16 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './styles.css'
 import CustomerCard from './CustomerCard'
 import Navbar from './Navbar'
 import UserForm from './UserForm'
 import {Button, TextField} from '@material-ui/core';
-let json = require('../customers.json')
+import axios from 'axios';
 
 const CustomerDashboard = () => {
     const [login, setLogin] = useState({username: "", password:""})
     const[showUserInfo, setShowUserInfo] = useState(false)
     const[customerOnDisplay, setCustomerOnDisplay] = useState({})
-    const [customers, setCustomers] = useState(json)
+    const [customers, setCustomers] = useState([])
     const newUser = {
         "id":"",
         "firstname":"",
@@ -30,8 +30,13 @@ const CustomerDashboard = () => {
         "note":"",
         "created":""
     }
-
-    let tableHeaders = ["Næste besøg", "Navn", "Adresse", "phone", "Interval ude/inde", "Pris ude/inde", "Sidste besøg", "Bemærkninger"]
+    
+    useEffect(async () => {
+        let res = await axios.get(`http://localhost:8080/api/customers/`)
+        console.log(res.data)
+        setCustomers(res.data)
+    },[])
+    let tableHeaders = ["Næste besøg", "Navn", "Adresse", "phone", "Interval ude/inde", "Pris ude/inde",/* "Sidste besøg", */"Bemærkninger"]
 
     const getWeekNumber = (unix) => {
         var date = new Date(unix);
@@ -142,8 +147,7 @@ const CustomerDashboard = () => {
                 <div className="customerCardText flex1"><p>{tableHeaders[3]}</p></div>
                 <div className="customerCardText flex1"><p>{tableHeaders[4]}</p></div>
                 <div className="customerCardText flex1"><p>{tableHeaders[5]}</p></div>
-                <div className="customerCardText flex1"><p>{tableHeaders[6]}</p></div>
-                <div className="customerCardText flex2"><p>{tableHeaders[7]}</p></div>
+                <div className="customerCardText flex2"><p>{tableHeaders[6]}</p></div>
             </div>
             {customers.map((customer) => {
                 return <CustomerCard customer={customer} editCustomer={editUser} jobDone={jobDone}></CustomerCard>
