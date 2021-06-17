@@ -4,7 +4,7 @@ import CustomerCard from './CustomerCard'
 import Navbar from './Navbar'
 import UserForm from './UserForm'
 import {Button, TextField} from '@material-ui/core';
-import axios from 'axios';
+import api from "./api"
 
 const CustomerDashboard = () => {
     const [login, setLogin] = useState({username: "", password:""})
@@ -32,9 +32,8 @@ const CustomerDashboard = () => {
     }
     
     useEffect(async () => {
-        let res = await axios.get(`http://localhost:8080/api/customers/`)
-        console.log(res.data)
-        setCustomers(res.data)
+        let res = await api.getCustomers()
+        setCustomers(res)
     },[])
     let tableHeaders = ["Næste besøg", "Navn", "Adresse", "phone", "Interval ude/inde", "Pris ude/inde",/* "Sidste besøg", */"Bemærkninger"]
 
@@ -55,7 +54,6 @@ const CustomerDashboard = () => {
         })
         return result
     }
-    console.log(getCustomer(1))
     let editUser = (id) =>{ 
         if (typeof id === "undefined") {
             setCustomerOnDisplay({...newUser})
@@ -86,6 +84,7 @@ const CustomerDashboard = () => {
         setCustomers([
             ...newCustomers
         ])
+        setShowUserInfo(!showUserInfo)
     }
 
     const sortCustomers = (sortBy) => {

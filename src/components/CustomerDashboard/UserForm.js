@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { TextField, Button } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
 import { makeStyles } from '@material-ui/core/styles';
+import api from "./api"
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -16,19 +17,19 @@ function UserForm(props) {
         setUser(props.user);
     }, [props.user])
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         let newUser = props.user.id === ""
-        console.log(newUser)
+        let res
         if (newUser){
             setUser({
-                ...user,
-                created:Date.now(),
-                id:10
+                ...user
             })
+            res = await api.createCustomer(user)
         } else{
             setUser({...user})
+            res = await api.updateCustomer(user)
         }
-        props.saveUser(user)
+        props.saveUser(res)
         e.preventDefault()
     }
 
