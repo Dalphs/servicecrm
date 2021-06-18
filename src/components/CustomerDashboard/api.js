@@ -15,4 +15,9 @@ async function updateCustomer(customer) {
     return res
 }
 
-export default {getCustomers, createCustomer, updateCustomer}
+async function deleteCustomer(customer){
+    let res = await axios.delete(`http://localhost:8080/api/customers/${customer.id}`)
+    return res
+}
+
+export default {getCustomers, createCustomer, updateCustomer, deleteCustomer}

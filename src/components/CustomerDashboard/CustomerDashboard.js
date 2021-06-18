@@ -101,6 +101,20 @@ const CustomerDashboard = () => {
         setCustomers(customerArray)
     }
 
+    const deleteCustomer = (id) =>  {
+        
+        let currentCustomers = [...customers];
+        currentCustomers.forEach( (customer, index) => {
+            if(customer.id === id){
+                api.deleteCustomer(customer)
+                currentCustomers.splice(index, 1)
+                //customer.visits.push({timestamp: new Date().getTime()/1000})
+            }
+        })
+        setCustomers(currentCustomers)
+        
+    }
+
     const jobDone = (id) => {
         let currentCustomers = [...customers];
         currentCustomers.forEach( customer => {
@@ -110,7 +124,8 @@ const CustomerDashboard = () => {
                 nextVisit.setDate(nextVisit.getDate() + Number(customer.intervalOutside) * 7)
                 let nextVisitWeek = getWeekNumber(nextVisit.getTime())
                 customer.nextvisit = nextVisitWeek
-                customer.visits.push({timestamp: new Date().getTime()/1000})
+                api.updateCustomer(customer)
+                //customer.visits.push({timestamp: new Date().getTime()/1000})
             }
         })
         console.log(currentCustomers)
