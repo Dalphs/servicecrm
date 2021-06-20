@@ -20,4 +20,14 @@ async function deleteCustomer(customer){
     return res
 }
 
-export default {getCustomers, createCustomer, updateCustomer, deleteCustomer}
+async function createUser(user){
+
+}
+
+async function login(user){
+    console.log(user)
+    let res = await axios.post(`http://localhost:8080/api/user/login/`, user)
+    console.log(res)
+    return res
+}
+export default {getCustomers, createCustomer, updateCustomer, deleteCustomer, createUser, login}

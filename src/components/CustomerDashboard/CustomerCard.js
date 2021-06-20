@@ -45,6 +45,9 @@ function CustomerCard(props) {
                     <div className="customerCardText flex1"><Button variant="outlined" color="primary" size="small" onClick={() => {props.jobDone(props.customer.id)}}>
                         Job udført
                     </Button></div>
+                    <div className="customerCardText flex1"><Button variant="outlined" color="primary" size="small" onClick={() => {props.deleteCustomer(props.customer.id)}}>
+                        Slet kunde
+                    </Button></div>
                  </div>
 
             </div>

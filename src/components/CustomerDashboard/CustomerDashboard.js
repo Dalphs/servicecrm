@@ -11,6 +11,7 @@ const CustomerDashboard = () => {
     const[showUserInfo, setShowUserInfo] = useState(false)
     const[customerOnDisplay, setCustomerOnDisplay] = useState({})
     const [customers, setCustomers] = useState([])
+    const [loggedIn, setLoggedIn] = useState(false)
     const newUser = {
         "id":"",
         "firstname":"",
@@ -131,10 +132,16 @@ const CustomerDashboard = () => {
         console.log(currentCustomers)
         setCustomers(currentCustomers)
     }
-    let loggedIn = true;
+    
 
-    let handleSubmit = (e) => {
+    let handleSubmit = async (e) => {
         e.preventDefault()
+        console.log("clicked")
+        let res = await api.login(login)
+        console.log(res)
+        setLoggedIn(res.data.token)
+        
+        
     }
 
     const onChange= (e) => {
@@ -164,7 +171,7 @@ const CustomerDashboard = () => {
                 <div className="customerCardText flex2"><p>{tableHeaders[6]}</p></div>
             </div>
             {customers.map((customer) => {
-                return <CustomerCard customer={customer} editCustomer={editUser} jobDone={jobDone}></CustomerCard>
+                return <CustomerCard customer={customer} editCustomer={editUser} jobDone={jobDone} deleteCustomer={deleteCustomer}></CustomerCard>
             })}
         </div>
     );
@@ -172,8 +179,8 @@ const CustomerDashboard = () => {
             return(
             <div id="loginWrapper">
                 <form onSubmit={handleSubmit}>
-                    <TextField variant="outlined" label="Fornavn" name="username" onChange={onChange} value={login.firstname}/>
-                    <TextField variant="outlined" label="Efternavn" name="password" type="password" onChange={onChange} value={login.lastname}/>
+                    <TextField variant="outlined" label="Brugernavn" name="username" onChange={onChange} value={login.username}/>
+                    <TextField variant="outlined" label="kodeord" name="password" type="password" onChange={onChange} value={login.password}/>
                     <Button
                     variant="contained"
                     color="primary"
