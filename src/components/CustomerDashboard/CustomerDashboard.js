@@ -3,15 +3,13 @@ import './styles.css'
 import CustomerCard from './CustomerCard'
 import Navbar from './Navbar'
 import UserForm from './UserForm'
-import {Button, TextField} from '@material-ui/core';
-import api from "./api"
+import UserService from "../../services/user.service"
 
 const CustomerDashboard = () => {
     const [login, setLogin] = useState({username: "", password:""})
     const[showUserInfo, setShowUserInfo] = useState(false)
     const[customerOnDisplay, setCustomerOnDisplay] = useState({})
     const [customers, setCustomers] = useState([])
-    const [loggedIn, setLoggedIn] = useState(false)
     const newUser = {
         "id":"",
         "firstname":"",
@@ -33,8 +31,9 @@ const CustomerDashboard = () => {
     }
     
     useEffect(async () => {
-        let res = await api.getCustomers()
-        setCustomers(res)
+        let res = await UserService.getCustomers()
+        console.log(res)
+        setCustomers(res.data)
     },[])
     let tableHeaders = ["Næste besøg", "Navn", "Adresse", "phone", "Interval ude/inde", "Pris ude/inde",/* "Sidste besøg", */"Bemærkninger"]
 
@@ -107,7 +106,7 @@ const CustomerDashboard = () => {
         let currentCustomers = [...customers];
         currentCustomers.forEach( (customer, index) => {
             if(customer.id === id){
-                api.deleteCustomer(customer)
+                UserService.deleteCustomer(customer)
                 currentCustomers.splice(index, 1)
                 //customer.visits.push({timestamp: new Date().getTime()/1000})
             }
@@ -125,23 +124,12 @@ const CustomerDashboard = () => {
                 nextVisit.setDate(nextVisit.getDate() + Number(customer.intervalOutside) * 7)
                 let nextVisitWeek = getWeekNumber(nextVisit.getTime())
                 customer.nextvisit = nextVisitWeek
-                api.updateCustomer(customer)
+                UserService.updateCustomer(customer)
                 //customer.visits.push({timestamp: new Date().getTime()/1000})
             }
         })
         console.log(currentCustomers)
         setCustomers(currentCustomers)
-    }
-    
-
-    let handleSubmit = async (e) => {
-        e.preventDefault()
-        console.log("clicked")
-        let res = await api.login(login)
-        console.log(res)
-        setLoggedIn(res.data.token)
-        
-        
     }
 
     const onChange= (e) => {
@@ -153,7 +141,7 @@ const CustomerDashboard = () => {
         })
     }
 
-    if (loggedIn){
+    
     return (
         <div>
             <Navbar editUser={editUser} weeknumber={getWeekNumber(new Date())}></Navbar>
@@ -175,24 +163,6 @@ const CustomerDashboard = () => {
             })}
         </div>
     );
-        } else {
-            return(
-            <div id="loginWrapper">
-                <form onSubmit={handleSubmit}>
-                    <TextField variant="outlined" label="Brugernavn" name="username" onChange={onChange} value={login.username}/>
-                    <TextField variant="outlined" label="kodeord" name="password" type="password" onChange={onChange} value={login.password}/>
-                    <Button
-                    variant="contained"
-                    color="primary"
-                    size="large"
-                    type="submit"
-                    >
-                        Log in
-                </Button>
-                </form>
-            </div>
-            )
-        }
 };
 
 export default CustomerDashboard;
