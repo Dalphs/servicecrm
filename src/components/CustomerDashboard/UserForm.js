@@ -3,6 +3,7 @@ import { TextField, Button } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
 import { makeStyles } from '@material-ui/core/styles';
 import UserService from "../../services/user.service"
+import { LocalConvenienceStoreOutlined } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -17,6 +18,23 @@ function UserForm(props) {
         setUser(props.user);
     }, [props.user])
 
+    const getChangedValues = (oldObject, newObject) => {
+        console.log(oldObject)
+        console.log(newObject)
+        let keys = Object.keys(oldObject)
+        let changedValues = {}
+           keys.forEach((key) => {
+            if(newObject.hasOwnProperty(key)){
+              console.log("newObject has key: " + key)
+            if(oldObject[key] !== newObject[key])
+              changedValues[key] = newObject[key]
+            }
+        })
+              
+              
+        return changedValues
+      }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         let newUser = props.user.id === ""
@@ -26,17 +44,20 @@ function UserForm(props) {
                 ...user
             })
             res = await UserService.createCustomer(user)
+            props.saveUser(res.data)
         } else{
             setUser({...user})
-            res = await UserService.updateCustomer(user)
+            res = await UserService.updateCustomer({...getChangedValues(props.user, user), id:user.id})
+            props.saveUser(res.data.customer)
         }
-        props.saveUser(res)
-        e.preventDefault()
+        console.log(res.data)
+        
     }
 
     const onChange= (e) => {
         const value = e.target.value;
         console.log(`${e.target.name}: ${value}`)
+        console.log(props.user)
         setUser({
             ...user,
             [e.target.name]:value
