@@ -17,6 +17,10 @@ class UserService {
     return axios.put(API_URL + `customers/${customer.id}`, customer, { headers: authHeader() });
   }
 
+  jobDone(id) {
+    return axios.post(API_URL + `customers/visits/jobdone`, {id: id}, { headers: authHeader() });
+  }
+
   deleteCustomer(customer) {
     return axios.delete(API_URL + `customers/${customer.id}`, { headers: authHeader() });
   }

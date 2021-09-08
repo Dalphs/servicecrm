@@ -84,7 +84,7 @@ const CustomerDashboard = () => {
         setCustomers([
             ...newCustomers
         ])
-        setShowUserInfo(!showUserInfo)
+        setShowUserInfo(false)
     }
 
     const sortCustomers = (sortBy) => {
@@ -115,21 +115,10 @@ const CustomerDashboard = () => {
         
     }
 
-    const jobDone = (id) => {
-        let currentCustomers = [...customers];
-        currentCustomers.forEach( customer => {
-            if(customer.id === id){
-                let nextVisit = new Date()
-                let days = nextVisit.getDate() + customer.intervalOutside
-                nextVisit.setDate(nextVisit.getDate() + Number(customer.intervalOutside) * 7)
-                let nextVisitWeek = getWeekNumber(nextVisit.getTime())
-                customer.nextvisit = nextVisitWeek
-                UserService.updateCustomer(customer)
-                //customer.visits.push({timestamp: new Date().getTime()/1000})
-            }
-        })
-        console.log(currentCustomers)
-        setCustomers(currentCustomers)
+    const jobDone = async id => {
+        let res = await UserService.jobDone(id)
+        console.log(res.data.data)
+        saveUser(res.data.data)
     }
 
     const onChange= (e) => {

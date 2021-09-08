@@ -5,8 +5,22 @@ import Register from './components/login/Register'
 import { Switch, Route, Redirect } from "react-router-dom";
 import AuthService from "./services/auth.service"
 
+//Returns true if JWT is expired or has less than 1 hour before expiration
+function changeJwt (jwt) {
+  let payload = buffer.from(jwt.split('.')[1], 'base64')
+  const expiration = new Date(payload)
+
+  return null
+}
+
 function requireAuth(nextState, replace, next) {
   if (!AuthService.getCurrentUser()) {
+    replace({
+      pathname: "/login",
+      state: {nextPathname: nextState.location.pathname}
+    });
+  } else if (changeJwt) {
+    AuthService.logout()
     replace({
       pathname: "/login",
       state: {nextPathname: nextState.location.pathname}
