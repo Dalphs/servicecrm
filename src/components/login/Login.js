@@ -27,36 +27,34 @@ function Login(props) {
             message: "",
             loading: true
         });
+        AuthService.login(user.username, user.password).then(
+            () => {
+                history.push("/dashboard");
+                window.location.reload();
+            },
+            error => {
+                const resMessage =
+                    (error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
+                    error.message ||
+                    error.toString();
 
-        
-            AuthService.login(user.username, user.password).then(
-                () => {
-                    history.push("/dashboard");
-                    window.location.reload();
-                },
-                error => {
-                    const resMessage =
-                        (error.response &&
-                            error.response.data &&
-                            error.response.data.message) ||
-                        error.message ||
-                        error.toString();
-
-                    setUser({...user, 
-                        loading: false,
-                        message: resMessage
-                    });
-                }
-            );
-       
+                setUser({...user, 
+                    loading: false,
+                    message: resMessage,
+                    loginFailed : true
+                });
+            }
+        );
         
     }
 
     return (
         <div id="loginWrapper">
             <form onSubmit={handleLogin}>
-                    <TextField variant="outlined" label="Brugernavn" name="username" onChange={onChangeUsername} value={user.username}/>
-                    <TextField variant="outlined" label="Kodeord" name="password" type="password" onChange={onChangePassword} value={user.password}/>
+                    <TextField variant="outlined" label="Brugernavn" name="username" onChange={onChangeUsername} value={user.username} error={user.loginFailed}/>
+                    <TextField variant="outlined" label="Kodeord" name="password" type="password" onChange={onChangePassword} value={user.password} error={user.loginFailed}/>
                     <Button
                     variant="contained"
                     color="primary"

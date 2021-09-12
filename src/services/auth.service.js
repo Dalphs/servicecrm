@@ -21,6 +21,7 @@ class AuthService {
 
     logout() {
         localStorage.removeItem("user");
+
     }
 
     register(username, email, password) {
