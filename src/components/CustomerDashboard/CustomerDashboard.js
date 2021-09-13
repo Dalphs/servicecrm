@@ -6,7 +6,6 @@ import UserForm from './UserForm'
 import UserService from "../../services/user.service"
 
 const CustomerDashboard = () => {
-    const [login, setLogin] = useState({username: "", password:""})
     const[showUserInfo, setShowUserInfo] = useState(false)
     const[customerOnDisplay, setCustomerOnDisplay] = useState({})
     const [customers, setCustomers] = useState([])
