@@ -3,7 +3,6 @@ import { TextField, Button } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
 import { makeStyles } from '@material-ui/core/styles';
 import UserService from "../../services/user.service"
-import { LocalConvenienceStoreOutlined } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     button: {

@@ -30,8 +30,12 @@ const CustomerDashboard = () => {
         "created":""
     }
     
-    useEffect(async () => {
-        let res = await UserService.getCustomers()
+    useEffect( () => {
+        const fetchData = async () => {
+            const repsonse = await UserService.getCustomers()
+            return repsonse
+        }
+        let res = fetchData()
         console.log(res)
         setCustomers(res.data)
     },[])
@@ -121,14 +125,14 @@ const CustomerDashboard = () => {
         saveUser(res.data.data)
     }
 
-    const onChange= (e) => {
+    /*const onChange= (e) => {
         const value = e.target.value;
         console.log(`${e.target.name}: ${value}`)
         setLogin({
             ...login,
             [e.target.name]:value
         })
-    }
+    }*/
 
     
     return (

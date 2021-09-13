@@ -14,11 +14,11 @@ const useStyles = makeStyles((theme) => ({
 function CustomerCard(props) {
     const classes = useStyles();
     const [show, setShow] = useState(false);
-    let convertToDate = (unixTime) => {
+    /*let convertToDate = (unixTime) => {
         let options = { year: 'numeric', month: 'long', day: 'numeric' };
         return new Date(unixTime * 1000).toLocaleDateString("da-DK", options);
 
-    }
+    }*/
     console.log(props.customer)
     return (
         <div className="customerCard">
