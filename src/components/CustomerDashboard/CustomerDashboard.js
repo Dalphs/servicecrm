@@ -31,12 +31,11 @@ const CustomerDashboard = () => {
     
     useEffect( () => {
         const fetchData = async () => {
-            const repsonse = await UserService.getCustomers()
-            return repsonse
+            const response = await UserService.getCustomers()
+            if(response.data) 
+                setCustomers(response.data)
         }
-        let res = fetchData()
-        console.log(res)
-        setCustomers(res.data)
+        fetchData()
     },[])
     let tableHeaders = ["Næste besøg", "Navn", "Adresse", "phone", "Interval ude/inde", "Pris ude/inde",/* "Sidste besøg", */"Bemærkninger"]
 
@@ -150,9 +149,11 @@ const CustomerDashboard = () => {
                 <div className="customerCardText flex1"><p>{tableHeaders[5]}</p></div>
                 <div className="customerCardText flex2"><p>{tableHeaders[6]}</p></div>
             </div>
-            {customers.map((customer) => {
+            {
+                customers.map((customer) => {
                 return <CustomerCard customer={customer} editCustomer={editUser} jobDone={jobDone} deleteCustomer={deleteCustomer}></CustomerCard>
-            })}
+            })
+            }
         </div>
     );
 };
